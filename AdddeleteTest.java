@@ -133,6 +133,160 @@ public class AdddeleteTest {
         /*
         * 以上方法的优点是不需要额外的存储空间，缺点也很明显，时间复杂度上比上面的算法时间复杂度要高
         * 假设外循环当前遍历的节点为cur，内循环在遍历过程中会删除掉与cur节点值相同的所有节点。*/
+        /*
+        * 如何找出单链表中的倒数第K个元素
+        * */
+        /*
+        * 为了找出单链表中的倒数第K个元素，最容易象到的方法是首先遍历一遍单链表，求出单链表的长度n，然后再将倒数第K个
+        * 转换成为正数第n-k个，接下来去遍历一遍就可以了，但是该方法的最大的一个失误就是将我们的链表
+        * 要遍历两次，所以我们不用这种方法，我们用我们的自己的方法*/
+        public Node findElem(int k){
+            if(k<1)
+                return null;
+            Node p1=head;
+            Node p2=head;
+            for(int i=0;i<k-1&&p1!=null;i++){
+                p1=p1.next;
+            }
+            if(p1==null){
+                System.out.println("我们的K不合法");
+            }
+            while(p1.next!=null){
+                p1=p1.next;
+                p2=p2.next;
+            }
+            return p2;
+        }
+        /*实现链表的反转*/
+    public void ReverseIteratively(){
+        Node pReserseHead=head;
+        Node pNode=head;
+        Node pPrev=null;
+        while(pNode!=null){
+            Node pNext=pNode.next;
+            if(pNext==null)
+                pReserseHead=pNode;//我们先将我们的下一个结点存储起来
+            pNode.next=pPrev;
+            pPrev=pNode;
+            pNode=pNext;
+        }
+        this.head=pReserseHead;
+    }
+    /*如何从尾到头输出单链表*/
+public void printListReversely(Node PListHead){
+
+    if(PListHead!=null){
+        printListReversely(PListHead.next);
+        System.out.print(PListHead.data);
+    }
+}
+/*
+* 如何寻找链表的中间结点*/
+public Node SearchMid(){
+    Node p=head;
+    Node q=head;
+    while(p!=null&&q!=null&&p.next.next!=null){
+        p=p.next.next;
+        q=q.next;
+    }
+    return q;
+}
+/*
+* 检查链表是否是带环链表*/
+public boolean IsLoop(){
+    Node fast=head;
+    Node slow=head;
+    if(fast==null){
+        return false;
+    }
+    while(fast!=null&&fast.next!=null){
+        fast=fast.next.next;
+        slow=slow.next;
+        if(fast==slow){
+            return true;
+        }
+    }
+    return !(fast==null||fast.next==null);
+}
+public Node FindLoopPort(){
+    Node slow=head;
+    Node fast=head;
+    while(fast!=null&&fast.next!=null){
+        slow=slow.next;
+        fast=fast.next.next;
+        if(slow==fast)
+            break;
+    }
+    if(fast==null||fast.next==null){
+        return null;
+    }
+    slow=head;
+    while(slow!=fast){
+        slow=slow.next;
+        fast=fast.next;
+    }
+    return slow;
+}
+public boolean deleteNode(Node n){
+    if(n==null||n.next==null)
+        return false;
+    int temp=n.data;
+    n.data=n.next.data;
+    n.next.data=temp;
+    n.next=n.next.next;
+    return true;
+}
+public boolean isIntersect(Node head1,Node head2){
+    if(head1==null||head2==null)
+        return false;
+    Node tail1=head1;
+    Node tail2=head2;
+    while(tail1.next!=null)
+        tail1=tail1.next;
+    while(tail2.next!=null)
+        tail2=tail2.next;
+
+    return tail1==tail2;
+}
+    public static Node getFirstMeetNode(Node head1,Node head2){
+    if(head1==null||head2==null)
+        return null;
+    Node tail1=head1;
+    int len1=0;
+    while(tail1!=null){
+        tail1=tail1.next;
+        len1++;
+    }
+    Node tail2=head2;
+    int len2=0;
+    while(tail2!=null){
+        tail2=tail2.next;
+        len2++;
+    }
+    //两个链表不相交
+        if(tail1!=tail2)
+            return null;
+        Node t1=head1;
+        Node t2=head2;
+        if(len1>len2){
+            int d=len1-len2;
+            while(d!=0){
+                t1=t1.next;
+                d--;
+            }
+        }else{
+            int d=len2-len1;
+            while(d!=0){
+                t2=t2.next;
+                d--;
+            }
+        }
+        while(t1!=t2){
+            t1=t1.next;
+            t2=t2.next;
+        }
+        return t1;
+    }
     public void printList(){
         Node temp=head;
         while(temp!=null){
@@ -142,17 +296,6 @@ public class AdddeleteTest {
         System.out.println(" ");
     }
     public static void main(String[] args) {
-    AdddeleteTest list=new AdddeleteTest();
-    list.addNode(3);
-    list.addNode(4);
-    list.addNode(5);
-    list.addNode(2);
-    list.addNode(1);
-    list.printList();
-    list.deleteNode(2);
-    list.orderList();
-    list.printList();
-        System.out.println("==================================");
     AdddeleteTest list2=new AdddeleteTest();
     list2.addNode(2);
     list2.addNode(3);
@@ -160,7 +303,13 @@ public class AdddeleteTest {
     list2.addNode(3);
     list2.addNode(4);
     list2.addNode(5);
-    list2.deleteDuplecate();
-    list2.printList();
+    Node temp=list2.head;
+    while(temp.next!=null){
+        temp=temp.next;
+    }
+   temp.next.next= list2.head.next.next;
+    boolean bool=list2.IsLoop();
+        System.out.println(bool);
+    list2.printListReversely(list2.head);
     }
 }
