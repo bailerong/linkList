@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Hashtable;
-
 class Node{
     Node next=null;
     int data;
