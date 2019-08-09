@@ -25,10 +25,12 @@ public class AdddeleteTest {
         }
         temp.next=newNode;
     }
+    
     /*
     * 删除第index个节点
     * 成功返回true，失败返回false
     * */
+    
     public Boolean deleteNode(int index){
         //删除的元素位置不合理
         if(index<1||index>length()){
@@ -312,3 +314,4 @@ public boolean isIntersect(Node head1,Node head2){
     list2.printListReversely(list2.head);
     }
 }
+//我们的链表
