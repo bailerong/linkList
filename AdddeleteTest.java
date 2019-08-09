@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Hashtable;
+
 class Node{
     Node next=null;
     int data;
@@ -7,7 +8,6 @@ class Node{
         this.data=data;
     }
 }
-
 public class AdddeleteTest {
     Node head=null;//链表头的作用
     /*
