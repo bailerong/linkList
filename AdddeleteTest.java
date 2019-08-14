@@ -313,3 +313,4 @@ public boolean isIntersect(Node head1,Node head2){
     }
 }
 //我们的链表
+//链表的操作还是比较齐全的，所以我们的很大程度上要能够进行我们的操作。
