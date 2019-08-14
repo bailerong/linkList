@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Hashtable;
-
 class Node{
     Node next=null;
     int data;
@@ -30,7 +29,6 @@ public class AdddeleteTest {
     * 删除第index个节点
     * 成功返回true，失败返回false
     * */
-    
     public Boolean deleteNode(int index){
         //删除的元素位置不合理
         if(index<1||index>length()){
